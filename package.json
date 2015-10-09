@@ -11,5 +11,9 @@
     "paparazzo"
   ],
   "author": "University Radio York",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "config": "^1.16.0",
+    "paparazzo": "^0.5.1"
+  }
 }
