@@ -1,0 +1,9 @@
+{
+    "Cameras": {
+        "Camera1": {
+            "host": "195.67.26.73",
+            "port": 80,
+            "path": "/mjpg/video.mjpg?camera=1"
+        }
+    }
+}
