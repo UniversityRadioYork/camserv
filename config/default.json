@@ -5,5 +5,8 @@
             "port": 80,
             "path": "/mjpg/video.mjpg?camera=1"
         }
+    },
+    "Server": {
+        "port": 3000
     }
 }

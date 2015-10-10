@@ -1,4 +1,4 @@
-var config, Paparazzo, http, url, cameraConfig, cameras, images;
+var config, Paparazzo, http, url, cameraConfig, serverPort, cameras, images;
 
 require('coffee-script/register');
 
@@ -8,6 +8,7 @@ http = require('http');
 url = require('url');
 
 cameraConfig = config.get('Cameras');
+serverPort = config.get('Server.port');
 
 cameras = {};
 images = {};
@@ -55,4 +56,4 @@ for (var camera in cameraConfig) {
     cameras[camera].start();
 }
 
-http.createServer(imageServer).listen(3000);
+http.createServer(imageServer).listen(serverPort);
