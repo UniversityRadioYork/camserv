@@ -1,12 +1,24 @@
 {
     "Cameras": {
-        "Camera1": {
+        "cam1": {
             "host": "195.67.26.73",
             "port": 80,
             "path": "/mjpg/video.mjpg?camera=1"
+        },
+        "cam2": {
+            "host": "plazacam.studentaffairs.duke.edu",
+            "port": 80,
+            "path": "/mjpg/video.mjpg"
         }
     },
+    "DefaultCam": "cam1",
     "Server": {
         "port": 3000
+    },
+    "API": {
+        "protocol": "http",
+        "hostname": "localhost",
+        "basePath": "/api",
+        "key": ""
     }
 }

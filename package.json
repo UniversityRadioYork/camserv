@@ -12,9 +12,18 @@
   ],
   "author": "University Radio York",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/UniversityRadioYork/camserver.git"
+  },
   "dependencies": {
+    "bluebird": "^2.10.2",
     "coffee-script": "^1.10.0",
+    "compression": "^1.6.0",
     "config": "^1.16.0",
-    "paparazzo": "^0.5.1"
+    "finalhandler": "^0.4.0",
+    "paparazzo": "^0.5.1",
+    "request-promise": "^1.0.0",
+    "router": "^1.1.3"
   }
 }
