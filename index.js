@@ -40,6 +40,10 @@ var imageError = function (camera) {
     };
 };
 
+var isValid = function (cam) {
+    return cameraConfig.hasOwnProperty(cam);
+};
+
 // todo: implement this
 var studioToCam = function (studioID) {
     return 'cam2';
@@ -89,15 +93,13 @@ var getCurrentCam = function () {
 var setCurrentCam = function (cam) {
 
     if (isValid(cam)) {
-        getAPI('/show/currentshow')
+        return getAPI('/show/currentshow')
             .then(function (data) {
                 var show = data.payload;
 
                 camMan.show = show.show_id;
             })
             .catch(function (err) {
-                apiError(err);
-
                 camMan.show = 0;
             })
             .finally(function () {
@@ -107,6 +109,8 @@ var setCurrentCam = function (cam) {
             .then(function () {
                 return updateCam();
             });
+    } else {
+        return updateCam();
     }
 
 };
@@ -163,7 +167,7 @@ router.get('/current', function (req, res) {
 router.post('/set/:cam', function (req, res) {
     res.statusCode = 204;
     res.setHeader('Content-Type', 'application/json');
-    setCurrentCam(cam)
+    setCurrentCam(req.params.cam)
         .finally(function () {
             res.end();
         });
