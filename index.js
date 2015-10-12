@@ -10,8 +10,8 @@ var Router = require('router');
 var finalhandler = require('finalhandler');
 var compression = require('compression');
 var url = require('url');
-var request = require('request-promise');
 var Promise = require('bluebird');
+var request = require('request-promise');
 
 var cameraConfig = config.get('Cameras');
 var defaultCam = config.get('DefaultCam');
@@ -83,7 +83,10 @@ var getCurrentCam = function () {
             }
 
         })
-        .finally(function () {
+        .then(function () {
+            return cam;
+        })
+        .catch(function () {
             return cam;
         });
 
@@ -158,7 +161,7 @@ router.get('/current', function (req, res) {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     getCurrentCam()
-        .finally(function (data) {
+        .then(function (data) {
             res.end(data);
         });
 });
