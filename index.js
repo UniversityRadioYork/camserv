@@ -40,16 +40,22 @@ var imageError = function (camera) {
     };
 };
 
+// Check that camera is in config
 var isValid = function (cam) {
     return cameraConfig.hasOwnProperty(cam);
 };
 
-// todo: implement this
-var studioToCam = function (studioID) {
-    return 'cam2';
+// Find the camera from the given roomID
+var roomToCam = function (roomID) {
+    for (var camera in cameraConfig) {
+        if (cameraConfig[camera].room === roomID) {
+            return camera;
+        }
+    }
+    return defaultCam;
 };
 
-// make an API GET request and return promise
+// Make an API GET request and return promise
 var getAPI = function (path) {
 
     var options = {
@@ -64,7 +70,7 @@ var getAPI = function (path) {
     return request(options);
 };
 
-// return a promise of the camera that *should* be live
+// Return a promise of the camera that *should* be live
 var getCurrentCam = function () {
 
     var cam = defaultCam;
@@ -76,7 +82,7 @@ var getCurrentCam = function () {
 
             if ((show === null) || (show.show_id !== camMan.show)) {
                 if (typeof studio !== 'undefined') {
-                    cam = studioToCam(studio);
+                    cam = roomToCam(studio);
                 }
             } else {
                 cam = camMan.cam;
@@ -92,7 +98,7 @@ var getCurrentCam = function () {
 
 };
 
-// set camMan with requested camera and return a promise of updateCam
+// Set camMan with requested camera and return a promise of updateCam
 var setCurrentCam = function (cam) {
 
     if (isValid(cam)) {
@@ -118,7 +124,7 @@ var setCurrentCam = function (cam) {
 
 };
 
-// update camLive with the camera that *should* be live
+// Update camLive with the camera that *should* be live
 var updateCam = function () {
     return getCurrentCam()
         .then(function (cam) {
@@ -126,6 +132,7 @@ var updateCam = function () {
         });
 };
 
+// Respond to http request with image from requested camera
 var imageServer = function (req, res) {
     var data = '';
     var cam = req.params.cam;
@@ -186,6 +193,7 @@ router.post('/update', function (req, res) {
         });
 });
 
+// Setup a seperate base router for view-ing cameras
 var view = Router();
 router.use('/view/', view);
 
@@ -208,4 +216,6 @@ for (var camera in cameraConfig) {
     cameras[camera].start();
 }
 
-server.listen(serverConfig.port);
+server.listen(serverConfig.port, function () {
+    console.log('CamServer is now running with ' + Object.keys(cameras).length + ' cameras.');
+});
