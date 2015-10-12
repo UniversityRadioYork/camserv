@@ -21,7 +21,7 @@ var apiConfig = config.get('API');
 var cameras = {};
 var images = {};
 
-var camLive = '';
+var camLive = defaultCam;
 var camMan = {
     cam: '',
     time: 0,
