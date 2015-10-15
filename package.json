@@ -1,5 +1,5 @@
 {
-  "name": "camserver",
+  "name": "camserv",
   "version": "1.0.0",
   "description": "MJPEG aggregator and server using paparazzo.js",
   "main": "index.js",
@@ -14,7 +14,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/UniversityRadioYork/camserver.git"
+    "url": "https://github.com/UniversityRadioYork/camserv.git"
   },
   "dependencies": {
     "bluebird": "^2.10.2",
