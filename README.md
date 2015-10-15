@@ -16,7 +16,7 @@ npm install
 
 Server can be started using `node index.js`
 
-Example can be accessed from [http://localhost:3000/view/cam1]
+Example can be accessed from [http://localhost:3000/view/cam1](http://localhost:3000/view/cam1)
 
 Define MJPEG stream servers in `config/local.json` using the syntax as seen in `config/default.json`
 
