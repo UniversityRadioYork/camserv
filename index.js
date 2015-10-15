@@ -122,6 +122,7 @@ var setCurrentCam = function (cam) {
                 camMan.time = Date.now();
             })
             .then(function () {
+                console.log('Set live camera to ' + cam);
                 return updateCam();
             });
     } else {
@@ -145,7 +146,7 @@ var imageServer = function (req, res) {
 
     if ((typeof images[cam] !== 'undefined') && images[cam] !== null) {
         data = images[cam];
-        console.log('Will serve image of ' + data.length + ' bytes');
+        //console.log('Will serve image of ' + data.length + ' bytes');
 
         res.writeHead(200, {
             'Content-Type': 'image/jpeg',
@@ -222,6 +223,10 @@ for (var camera in cameraConfig) {
     cameras[camera].start();
 }
 
+// Update every 1 min to make sure right cam is on air
+setInterval(update, 60000);
+
+// Launch the server
 server.listen(serverConfig.port, function () {
     console.log('CamServer is now running with ' + Object.keys(cameras).length + ' cameras.');
 });
