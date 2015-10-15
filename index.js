@@ -90,10 +90,16 @@ var getCurrentCam = function () {
 
         })
         .then(function () {
-            return cam;
+            return {
+                camera: cam,
+                room: cameraConfig[cam].room
+            };
         })
         .catch(function () {
-            return cam;
+            return {
+                camera: cam,
+                room: cameraConfig[cam].room
+            };
         });
 
 };
@@ -128,7 +134,7 @@ var setCurrentCam = function (cam) {
 var updateCam = function () {
     return getCurrentCam()
         .then(function (cam) {
-            camLive = cam;
+            camLive = cam.camera;
         });
 };
 
@@ -169,7 +175,7 @@ router.get('/current', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     getCurrentCam()
         .then(function (data) {
-            res.end(data);
+            res.end(JSON.stringify(data));
         });
 });
 
