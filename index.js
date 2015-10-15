@@ -224,7 +224,7 @@ for (var camera in cameraConfig) {
 }
 
 // Update every 1 min to make sure right cam is on air
-setInterval(update, 60000);
+setInterval(updateCam, 60000);
 
 // Launch the server
 server.listen(serverConfig.port, function () {
