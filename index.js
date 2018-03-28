@@ -229,4 +229,6 @@ setInterval(updateCam, 60000);
 // Launch the server
 server.listen(serverConfig.port, function () {
     console.log('CamServer is now running with ' + Object.keys(cameras).length + ' cameras.');
+    //Update from the default camera more quickly.
+    updateCam();
 });
